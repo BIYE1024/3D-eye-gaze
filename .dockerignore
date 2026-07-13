@@ -1,0 +1,62 @@
+# Python cache/build output
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Local environments
+venv/
+.venv/
+env/
+.env/
+conda_env/
+
+# IDE/editor state
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git metadata
+.git/
+.gitignore
+.gitattributes
+
+# Large datasets are mounted at runtime instead of copied into the image.
+Datasets/
+data/
+dataset/
+*.h5
+
+# Runtime output
+Results/
+logs/
+figures/
+wandb/
+*.log
+docker-build.log
+docker-build.err
+
+# Model weights are mounted or downloaded separately.
+*.pt
+*.pth
+*.ckpt
+pretrained/
+
+# Documentation and media are not required inside the runtime image.
+README.md
+Licence.md
+DOCKER_GUIDE.md
+images/
+*.md
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
