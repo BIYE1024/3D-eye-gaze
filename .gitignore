@@ -2,7 +2,8 @@
 docker_wheels/
 
 # ── Runtime output ──
-Results/
+Results/*
+!Results/last.pt
 logs/
 demo_output/
 wandb/
@@ -17,6 +18,9 @@ raw_data/
 *.pt
 *.pth
 *.ckpt
+
+# Exception: track last.pt via Git LFS
+!Results/last.pt
 
 # ── Tool dirs ──
 .agents/
