@@ -39,20 +39,20 @@ ENV FORCE_CUDA=1 \
 
 WORKDIR /workspace
 
-# Large CUDA/PyTorch packages are installed from local wheels first.
-COPY docker_wheels /tmp/wheels
+# PyTorch ecosystem — installed from official index (CUDA 11.8)
+RUN pip install --no-cache-dir \
+    torch==2.0.1+cu118 \
+    torchvision==0.15.2+cu118 \
+    torchaudio==2.0.2+cu118 \
+    --index-url https://download.pytorch.org/whl/cu118
 
-RUN pip install --no-cache-dir --find-links=/tmp/wheels \
-    /tmp/wheels/torch-2.0.1+cu118-cp310-cp310-linux_x86_64.whl \
-    /tmp/wheels/torchvision-0.15.2+cu118-cp310-cp310-linux_x86_64.whl \
-    /tmp/wheels/torchaudio-2.0.2+cu118-cp310-cp310-linux_x86_64.whl
-
+# Other Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir --find-links=/tmp/wheels -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir --find-links=/tmp/wheels \
-    /tmp/wheels/pytorch3d-0.7.4-cp310-cp310-linux_x86_64.whl \
-    && rm -rf /tmp/wheels
+# PyTorch3D — pre-built wheel for CUDA 11.8 + Python 3.10
+RUN pip install --no-cache-dir pytorch3d \
+    -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu118_pyt201/download.html
 
 COPY . .
 
